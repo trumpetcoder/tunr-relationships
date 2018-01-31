@@ -1,4 +1,5 @@
 var db = require('../models');
+var Artist = db.models.Artist;
 var Manager = db.models.Manager;
 
 function index(req, res) {
@@ -8,7 +9,7 @@ function index(req, res) {
 }
 
 function show(req, res) {
-  Manager.findById(req.params.id)
+  Manager.findById(req.params.id, { include: Artist })
   .then(function(manager){
     if(!manager) res.send("manager not found");
     else res.json(manager);
